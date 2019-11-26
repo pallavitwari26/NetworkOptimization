@@ -83,29 +83,30 @@ namespace Heap
 
         private void HeapifyDown()
         {
-            int largest = 0, i = 0;
+            int largest = 0, index = 0;
             try
             {
-                while (LeftChild(i) < Size)
+                while (LeftChild(index) < Size)
                 {
-                    largest = LeftChild(i);
-                    int leftChildBW = LeftChildBandwidth(i);
-                    int rightChildBW = RightChildBandwidth(i);
+                    largest = LeftChild(index);
+                    int leftChildBW = LeftChildBandwidth(index);
+                    int rightChildBW = RightChildBandwidth(index);
                     if (rightChildBW < Size && leftChildBW < rightChildBW)
                     {
-                        largest = RightChild(i);
+                        largest = RightChild(index);
                     }
-                    if (D[H[largest]] < D[H[i]])
-                        break;
-                    else
-                        Swap(largest, i);
-                    i = largest;
+
+                    if (D[H[largest]] > D[H[index]])
+                    {
+                        Swap(largest, index);
+                    }
+                    index = largest;
                 }
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("Error in heapifyDown. Message: " + ex.Message + " index= " + i);
+                Console.WriteLine("Error in heapifyDown. Message: " + ex.Message + " index= " + index);
             }
         }
 
@@ -165,25 +166,7 @@ namespace Heap
             H[second] = temp;
         }
 
-        public void PrintH()
-        {
-
-            for (int i = 0; i < this.Size; i++)
-            {
-                Console.Write(this.H[i] + " ");
-            }
-            Console.WriteLine();
-        }
-
-        public void PrintD()
-        {
-   
-            for (int i = 0; i < this.Size; i++)
-            {
-                Console.Write(this.D[i] + " ");
-            }
-            Console.WriteLine();
-        }
+      
 
     }
 }
