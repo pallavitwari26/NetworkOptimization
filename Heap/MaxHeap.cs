@@ -91,7 +91,7 @@ namespace Heap
                     largest = LeftChild(index);
                     int leftChildBW = LeftChildBandwidth(index);
                     int rightChildBW = RightChildBandwidth(index);
-                    if (rightChildBW < Size && leftChildBW < rightChildBW)
+                    if (RightChild(index) < Size && leftChildBW < rightChildBW)
                     {
                         largest = RightChild(index);
                     }
@@ -113,8 +113,7 @@ namespace Heap
         private void HeapifyUp(int index)
         {
             try
-            {
-                
+            {                
                   while ((index-1)/2>=0 && D[H[index]] > ParentBandwidth(index))
                 {
                     Swap(index, Parent(index));

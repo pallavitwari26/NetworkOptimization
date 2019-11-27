@@ -40,7 +40,7 @@ namespace Algorithms
                 }
 
                 Status[source] = (int)Enum.VertexStatus.INTREE;             
-                //Console.Write("Path : "+ source + " ");
+               // Console.Write("Path : "+ source + " ");
                 Dad[source] = 0;
                 Bandwidth[source] = 0;
 
@@ -71,7 +71,7 @@ namespace Algorithms
                         }
                     }
                     Status[maximumIndex] = (int)Enum.VertexStatus.INTREE;
-                   // Console.Write(maximumIndex + " ");
+                    //Console.Write(maximumIndex + " ");
 
 
                     List<Edge> verticesTowardsMax = graph.Adjacent[maximumIndex];
@@ -128,7 +128,7 @@ namespace Algorithms
                 }
 
                 Status[source] = (int)Enum.VertexStatus.INTREE;
-                //Console.Write("Path : " +source + " ");
+               // Console.Write("Path : " +source + " ");
                 Dad[source] = 0;
                 Bandwidth[source] = 0;
 
@@ -151,7 +151,7 @@ namespace Algorithms
                     maximumIndex = maxHeap.ExtractMaximum();          
                     Status[maximumIndex] = (int)Enum.VertexStatus.INTREE;
 
-                    //Console.Write(maximumIndex + " ");
+                   // Console.Write(maximumIndex + " ");
 
 
                     List<Edge> verticesTowardsMax = graph.Adjacent[maximumIndex];
