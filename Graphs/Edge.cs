@@ -39,13 +39,8 @@ namespace Graphs
                 return Start;
         }
 
-        override
-      public String ToString()
-        {
-            return Start + "-" + End + " " + Weight;
-        }
 
-        public  bool EdgeExists( Edge e,List<Edge> lstEdges)
+      public  bool EdgeExists( Edge e,List<Edge> lstEdges)
         {
             foreach (var edge in lstEdges)
             {
@@ -59,6 +54,13 @@ namespace Graphs
             return false;
         }
 
-        
+        override
+        public string ToString()
+        {
+            return "[" + Start + "," + End + "," + Weight + "]";
+        }
+
+
+
     }
 }

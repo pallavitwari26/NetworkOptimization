@@ -11,7 +11,7 @@ namespace Graphs
     {
        Random random;
        Stopwatch watch;
-       double elapsedS;
+       double elapsed;
        int totalEdges;
        int sumOfDegrees = 0;
 
@@ -21,7 +21,7 @@ namespace Graphs
         {
            random = new Random();
            totalEdges = 0;
-           RandomNext = 100;
+           RandomNext = 10000;
         }
 
         public void GenerateConnectedGraph(Graph g)
@@ -57,7 +57,7 @@ namespace Graphs
 
         public Graph GenerateSparseGraph(Graph graph, int vertices, int degree)
         {
-            elapsedS = 0;
+            elapsed = 0;
             watch = Stopwatch.StartNew();
           
             try
@@ -87,15 +87,15 @@ namespace Graphs
             Console.WriteLine("Generate Undirected Sparse Graph");
             graph.NumberOfEdges = totalEdges;
             Console.WriteLine("Total Edges in Undirected Sparse Graph = " + graph.NumberOfEdges);
-                graph.NumberOfEdges = totalEdges; //use for kruskal
+                graph.NumberOfEdges = totalEdges; 
                 for (int i = 0; i < vertices; i++)
                 {
                     sumOfDegrees += graph.Adjacent[i].Count;
                 }
             Console.WriteLine("Average degree = " + Convert.ToDouble(sumOfDegrees/vertices));
 
-            elapsedS = watch.Elapsed.TotalSeconds;
-            Console.WriteLine("Time to generate undirected sparse graph =  " + Math.Round(elapsedS,6));
+            elapsed = watch.Elapsed.TotalSeconds;
+            Console.WriteLine("Time to generate undirected sparse graph =  " + elapsed);
             //graph.PrintGraph();
             }
              catch (Exception e)
@@ -108,7 +108,7 @@ namespace Graphs
 
         public  Graph GenerateDenseGraph(Graph graph,int vertices,int percentage)
         {
-            elapsedS = 0;
+            elapsed = 0;
             graph.NumberOfEdges = 0;
             watch = Stopwatch.StartNew();           
             sumOfDegrees = 0;
@@ -119,9 +119,9 @@ namespace Graphs
                 {
                     for (int j = i + 1; j < vertices; j++)
                     {
-                        int probability = random.Next(100)+1;
+                        int randomProbability = random.Next(100)+1;
                         int randomWeight = random.Next(RandomNext) + 1;
-                        if (probability <= percentage)
+                        if (randomProbability <= percentage)
                         {
                             Edge e = new Edge(i, j, randomWeight);
                             if (!e.EdgeExists(e, graph.Adjacent[i]))
@@ -135,7 +135,7 @@ namespace Graphs
                     }
                 }
                 watch.Stop();
-                elapsedS = watch.Elapsed.TotalSeconds;
+                elapsed = watch.Elapsed.TotalSeconds;
                 Console.WriteLine();
                 Console.WriteLine("Generate Undirected Dense Graph");
                 graph.NumberOfEdges = totalEdges; // use for kruskal
@@ -147,14 +147,14 @@ namespace Graphs
                 }
           
                 Console.WriteLine("Average degree = " + sumOfDegrees / vertices);
-                Console.WriteLine("Time to generate undirected dense graph =  " + Math.Round(elapsedS,6));
+                Console.WriteLine("Time to generate undirected dense graph =  " + elapsed);
                 //graph.PrintGraph();
             }
             catch(Exception e)
             {
                 Console.WriteLine("Error in graph generation. Message= " + e.Message);
             }
-            return graph;
+               return graph;
 
         }
 

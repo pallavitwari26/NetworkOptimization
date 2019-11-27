@@ -10,13 +10,11 @@ namespace Graphs
     {
         #region Variables
         private int numberOfVertices;
-        private int edge;
         private int[] degree;
         private List<Edge>[] adjacent;
 
 
         public int NumberOfVertices { get => numberOfVertices; set => numberOfVertices = value; }
-        public int Edge { get => edge; set => edge = value; }
         public int[] Degree { get => degree; set => degree = value; }
         public List<Edge>[] Adjacent { get => adjacent; set => adjacent = value; }
         public int NumberOfEdges { get; set; }
@@ -31,7 +29,6 @@ namespace Graphs
             if (vertices == 0)
                 throw new Exception("Graph cannot be created with 0 vertices");
             this.numberOfVertices = vertices;
-            this.Edge = 0;
             this.Degree = new int[vertices];
             Adjacent = new List<Edge>[vertices];
             for (int i = 0; i < vertices; i++)
@@ -53,12 +50,6 @@ namespace Graphs
             Adjacent[end].Add(edge2);
         }
 
-
-        public int GetNumberOfEdges()
-        {
-            return this.numberOfVertices * degree[0] / 2;
-        }
-
         public void PrintGraph()
         {
             for (int i = 0; i < NumberOfVertices; i++)
@@ -73,6 +64,29 @@ namespace Graphs
 
                 Console.WriteLine();
             }
+        }
+
+
+        public List<Edge> GetDistinctEdges(List<Edge>[] adjacentList)
+        {
+            List<Edge> lstDistinctEdges = new List<Edge>();
+
+            for (int i = 0; i < adjacentList.Length; i++)
+            {
+
+                foreach (Edge edge in adjacent[i])
+                {
+                    Edge reverseEdge = new Edge(edge.End, edge.Start, edge.Weight);
+                    if (!(lstDistinctEdges.Any(p => p.Start == reverseEdge.Start
+                    && p.End == reverseEdge.End && p.Weight == reverseEdge.Weight) || lstDistinctEdges.Any(p => p.Start == edge.Start
+                    && p.End == edge.End && p.Weight == edge.Weight)))
+                    {
+                        lstDistinctEdges.Add(edge);
+                    }
+                 
+                }
+            }
+            return lstDistinctEdges;
         }
         #endregion
 
